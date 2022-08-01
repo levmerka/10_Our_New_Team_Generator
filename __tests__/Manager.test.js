@@ -1,8 +1,8 @@
 const Manager = require(`../lib/Manager`);
 
 it(`manager test`, () => {
-  const officeNo = `internSchool`;
-  let employee = new Intern(``, ``, ``, schoolName);
-  expect(employee.schoolName).toBe(schoolName);
-  expect(employee.getSchoolName()).toBe(schoolName);
+  const officeNo = `managerOffice`;
+  let employee = new Manager(``, ``, ``, officeNo);
+  expect(employee.officeNo()).toBe(officeNo);
+  expect(employee.getOfficeNo()).toBe(officeNo);
 });

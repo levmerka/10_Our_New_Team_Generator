@@ -22,10 +22,10 @@ it (`test methods`, () =>{
   const email = `employeeEmail`
 
   //  act, 
-  let employee1 = new Employee(name, id, email);
+  let employee = new Employee(name, id, email);
 
   // assert
-  expect(employee1.getName()).toBe(name)
-  expect(employee1.getId()).toBe(id)
-  expect(employee1.getEmail()).toBe(email)
+  expect(employee.getName()).toBe(name)
+  expect(employee.getId()).toBe(id)
+  expect(employee.getEmail()).toBe(email)
 })
