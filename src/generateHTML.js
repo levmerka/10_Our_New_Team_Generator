@@ -5,7 +5,7 @@ const fs = require(`fs`);
 const Intern = require("../lib/Intern");
 const Engineer = require("../lib/Engineer");
 const Manager = require("../lib/Manager");
-const roster = []
+const roster = [];
 // Generates HTML file
 function writeToFile(data) {
   fs.writeFile("./dist/index.html", data, (err) =>
@@ -31,16 +31,10 @@ function generateHTML(data) {
           <h1 class="text center">New Hires</h1>
         </div>
       </div>
-    </div>
-    
-${
-  roster.map((employee)=>{
-    return generateCard(employee)
-  })
-}
-
- 
-
+    </div> 
+${roster.map((employee) => {
+  return generateCard(employee);
+})}
   </body>
 </html>
   `;
@@ -57,7 +51,7 @@ function generateCard(data) {
     <li>email:${data.email}</li>
   </ul>
 </div>
-`
+`;
 }
 // Prompts inquirer questions
 // and loops through
@@ -78,7 +72,7 @@ async function mainMenu() {
       answers.email,
       answers.school
     );
-    roster.push(newIntern)
+    roster.push(newIntern);
     mainMenu();
   }
   if (nextEmployee.role == "Engineer") {
@@ -89,7 +83,7 @@ async function mainMenu() {
       answers.email,
       answers.github
     );
-    roster.push(newEngineer)
+    roster.push(newEngineer);
     mainMenu();
   }
   if (nextEmployee.role == "Manager") {
@@ -100,7 +94,7 @@ async function mainMenu() {
       answers.email,
       answers.officeno
     );
-    roster.push(newManager)
+    roster.push(newManager);
     mainMenu();
   }
   if (nextEmployee.role == `Done?`) {
