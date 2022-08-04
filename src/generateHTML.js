@@ -1,13 +1,12 @@
 const { prompt } = require("inquirer");
-const { questions, manager, intern, engineer, role } = require("../data");
+const { role, questions, manager, intern, engineer } = require("../data");
 const Manager = require("../lib/Manager");
 const fs = require(`fs`);
-
 
 // Generates HTML file
 function writeToFile(data) {
   fs.writeFile("./dist/index.html", data, (err) =>
-    err ? console.error(err) : console.log("Success")
+    err ? console.error(err) : console.log("Success :O")
   );
 }
 function generateHTML(data) {
@@ -39,35 +38,45 @@ function generateHTML(data) {
         <li>ID:${data.id}</li>
         <li>email:${data.email}</li>
         <li>unique</li>
-      </ul>
+      </ul>yes e
     </div>
 
-    
+
   </body>
 </html>
   `;
 
-  console.log(data)
-
-};
-// Prompts inquirer questions 
+  console.log(data);
+}
+// Prompts inquirer questions
 // and loops through
 async function init() {
   const roster = [];
   try {
-    const answers = await prompt(manager);
-    const newManager = new Manager(
-      answers.name,
-      answers.id,
-      answers.email,
-      answers.officeno
-    );
+    const answers = await prompt(questions);
+    let newManager = new Manager
+    (
+      answers.name, 
+      answers.id, 
+      answers.email);
+
     roster.push(newManager);
     console.log(roster);
+    
     let nextEmployee = await prompt(role);
+    if (nextEmployee.role == "Intern") {
+      answers = await prompt(intern);
+    }
+    if (nextEmployee.role == "Engineer") {
+      answers = await prompt(engineer);
+    }
+    if (nextEmployee.role == "Manager") {
+      answers = await prompt(manager);
+    }
     while (nextEmployee.role != `Done?`) {
       nextEmployee = await prompt(role);
     }
+
     writeToFile(generateHTML(answers));
   } catch (err) {
     console.error(err);

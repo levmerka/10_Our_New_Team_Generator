@@ -1,3 +1,16 @@
+const role = [
+  {
+    type: `list`,
+    message: `type of employee?`,
+    name: `role`,
+    choices: [
+      `Manager`,
+      `Intern`,
+      `Engineer`,
+      `Done?`,
+    ],
+  },
+]
 const questions = [
   {
     type: 'input',
@@ -18,6 +31,7 @@ const questions = [
   },
 
 ]
+
 const manager = [
   ...questions,
   {
@@ -42,17 +56,5 @@ const engineer = [
     name: `github`,
   },
 ]
-const role = [
-  {
-    type: `list`,
-    message: `type of employee?`,
-    name: `role`,
-    choices: [
-      `Manager`,
-      `Intern`,
-      `Engineer`,
-      `Done?`,
-    ],
-  },
-]
+
 module.exports ={questions, manager, intern, engineer, role}
