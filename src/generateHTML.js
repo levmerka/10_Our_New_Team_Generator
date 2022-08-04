@@ -1,6 +1,6 @@
 const { prompt } = require("inquirer");
 const { role, questions, manager, intern, engineer } = require("../data");
-const Manager = require("../lib/Manager");
+const Employee = require("../lib/Employee");
 const fs = require(`fs`);
 
 // Generates HTML file
@@ -53,14 +53,14 @@ function generateHTML(data) {
 async function init() {
   const roster = [];
   try {
-    const answers = await prompt(questions);
-    let newManager = new Manager
+    const answers = await prompt(role);
+    let newEmployee = new Employee
     (
       answers.name, 
       answers.id, 
       answers.email);
 
-    roster.push(newManager);
+    roster.push(newEmployee);
     console.log(roster);
     
     let nextEmployee = await prompt(role);
