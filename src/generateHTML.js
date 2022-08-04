@@ -2,6 +2,9 @@ const { prompt } = require("inquirer");
 const { role, questions, manager, intern, engineer } = require("../data");
 const Employee = require("../lib/Employee");
 const fs = require(`fs`);
+const Intern = require("../lib/Intern");
+const Engineer = require("../lib/Engineer");
+const Manager = require("../lib/Manager");
 
 // Generates HTML file
 function writeToFile(data) {
@@ -53,33 +56,48 @@ function generateHTML(data) {
 async function init() {
   const roster = [];
   try {
-    const answers = await prompt(role);
-    let newEmployee = new Employee
-    (
-      answers.name, 
-      answers.id, 
-      answers.email);
-
-    roster.push(newEmployee);
-    console.log(roster);
-    
-    let nextEmployee = await prompt(role);
-    if (nextEmployee.role == "Intern") {
-      answers = await prompt(intern);
-    }
-    if (nextEmployee.role == "Engineer") {
-      answers = await prompt(engineer);
-    }
-    if (nextEmployee.role == "Manager") {
-      answers = await prompt(manager);
-    }
-    while (nextEmployee.role != `Done?`) {
-      nextEmployee = await prompt(role);
-    }
-
-    writeToFile(generateHTML(answers));
+    mainMenu();
   } catch (err) {
     console.error(err);
+  }
+}
+async function mainMenu() {
+  let nextEmployee = await prompt(role);
+  if (nextEmployee.role == "Intern") {
+    answers = await prompt(intern);
+    let newIntern = new Intern(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.school
+    );
+    // roster.push(newIntern)
+    mainMenu();
+  }
+  if (nextEmployee.role == "Engineer") {
+    answers = await prompt(engineer);
+    let newEngineer = new Engineer(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.github
+    );
+    // roster.push(newEngineer)
+    mainMenu();
+  }
+  if (nextEmployee.role == "Manager") {
+    answers = await prompt(manager);
+    let newManager = new Manager(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.officeno
+    );
+    // roster.push(newManager)
+    mainMenu();
+  }
+  if (nextEmployee.role == `Done?`) {
+    writeToFile(generateHTML(answers));
   }
 }
 
