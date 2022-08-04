@@ -4,13 +4,15 @@ const Manager = require("../lib/Manager");
 const fs = require(`fs`);
 
 function writeToFile(data) {
-  fs.writeFile("../dist/index.html", data, (err) =>
+  fs.writeFile("./dist/index.html", data, (err) =>
     err ? console.error(err) : console.log("Success")
-    );
+  );
 }
 function generateHTML(data) {
-  return 
-  // HTML 
+  return ($("./templateIndex.html"))
+
+  console.log(data)
+
 }
 
 async function init() {
@@ -27,14 +29,12 @@ async function init() {
     console.log(roster);
     let nextEmployee = await prompt(role);
     while (nextEmployee.role != `Done?`) {
-
       nextEmployee = await prompt(role);
     }
     writeToFile(generateHTML(answers));
   } catch (err) {
     console.error(err);
   }
-
 }
 
 module.exports = { init };
